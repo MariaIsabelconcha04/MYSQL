@@ -1,20 +1,26 @@
-# Base de Datos Universidad
+# Base de Datos Universidad - MySQL
 
-Proyecto de MySQL basado en el ejercicio del PDF **Funciones, Procedimientos y Triggers** y adaptado a la estructura original de `universidad.sql`.
+Proyecto realizado en **MySQL** a partir del PDF de la actividad de funciones, procedimientos y triggers y de la estructura original de `universidad.sql`.
 
-## Archivo principal
+## Archivos
 
-- `universidad.sql`: crea la base de datos `universidad`, conserva sus tablas y datos originales y agrega las tablas de calificaciones/auditoría, funciones, procedimientos, triggers y pruebas.
+- `universidad.sql`: archivo original de la base de datos.
+- `01_base_datos.sql`: base completa preparada para la actividad; incluye matrícula, calificaciones e historial.
+- `02_funciones.sql`: 5 funciones MySQL.
+- `03_procedimientos.sql`: 5 procedimientos almacenados.
+- `04_triggers.sql`: 5 triggers.
+- `05_pruebas.sql`: consultas y llamadas para comprobar el funcionamiento.
+- `Actividad_Completa_MySQL.sql`: todos los scripts anteriores unidos en un único archivo para MySQL Workbench.
 
 ## Funciones
 
-1. `fnc_calcular_nota_final(id_matricula)`
-2. `fnc_obtener_estado_academico(id_matricula)`
-3. `fnc_total_creditos(id_alumno, id_curso_escolar)`
-4. `fnc_promedio_asignatura(id_asignatura)`
-5. `fnc_asignaturas_aprobadas(id_alumno)`
+1. `fnc_calcular_nota_final`
+2. `fnc_obtener_estado_academico`
+3. `fnc_total_creditos`
+4. `fnc_promedio_asignatura`
+5. `fnc_asignaturas_aprobadas`
 
-## Procedimientos almacenados
+## Procedimientos
 
 1. `sp_guardar_calificacion`
 2. `sp_generar_acta_curso`
@@ -24,25 +30,27 @@ Proyecto de MySQL basado en el ejercicio del PDF **Funciones, Procedimientos y T
 
 ## Triggers
 
-- Normalización y validación de notas al insertar.
-- Normalización y validación de notas al actualizar.
-- Auditoría de modificaciones de notas.
+- Validación de notas al insertar.
+- Validación de notas al actualizar.
+- Conversión de trabajo práctico 0 a NULL.
+- Registro automático de fecha.
+- Auditoría de cambios de calificaciones.
 - Prevención de matrículas duplicadas.
-- Asignación automática de `fecha_registro` al insertar calificaciones.
 
-## Ejecutar en MySQL Workbench
+## Ejecución en MySQL Workbench
 
-1. Abrir **MySQL Workbench**.
-2. Abrir `universidad.sql`.
-3. Ejecutar el script completo con el botón del rayo.
-4. Actualizar **Schemas**.
-5. Abrir el esquema `universidad`.
-6. Revisar **Tables**, **Functions**, **Stored Procedures** y **Triggers**.
+### Opción 1: todo en un archivo
 
-El archivo incluye consultas de prueba al final para comprobar las funciones, procedimientos y auditoría.
+Abrir `Actividad_Completa_MySQL.sql` y ejecutar con el botón del rayo.
 
-## Nota
+### Opción 2: por archivos
 
-El PDF solicita eventos INSERT/UPDATE para algunos ejercicios de triggers. En MySQL se implementan mediante triggers separados por evento cuando es necesario, manteniendo la funcionalidad solicitada.
+Ejecutar en este orden:
 
-> Script revisado para ejecutarse en MySQL Workbench con la estructura `universidad`.
+1. `01_base_datos.sql`
+2. `02_funciones.sql`
+3. `03_procedimientos.sql`
+4. `04_triggers.sql`
+5. `05_pruebas.sql`
+
+La base queda creada como `universidad`.
