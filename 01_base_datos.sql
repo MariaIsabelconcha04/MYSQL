@@ -257,6 +257,39 @@ INSERT INTO alumno_se_matricula_asignatura VALUES (19, 7, 5);
 INSERT INTO alumno_se_matricula_asignatura VALUES (19, 8, 5);
 INSERT INTO alumno_se_matricula_asignatura VALUES (19, 9, 5);
 INSERT INTO alumno_se_matricula_asignatura VALUES (19, 10, 5);
--- Genera un identificador de matrícula después de cargar los datos originales.
+-- Identificador único de matrícula para funciones, procedimientos y calificaciones.
 ALTER TABLE alumno_se_matricula_asignatura
     ADD COLUMN id_matricula INT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE FIRST;
+
+CREATE TABLE calificaciones (
+    id_calificacion INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id_matricula INT UNSIGNED NOT NULL UNIQUE,
+    parcial1 DECIMAL(4,2) NOT NULL,
+    parcial2 DECIMAL(4,2) NOT NULL,
+    parcial_final DECIMAL(4,2) NOT NULL,
+    trabajo_practico DECIMAL(4,2) NULL,
+    fecha_registro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_calificaciones_matricula
+        FOREIGN KEY (id_matricula) REFERENCES alumno_se_matricula_asignatura(id_matricula)
+);
+
+CREATE TABLE historial_calificaciones (
+    id_historial INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id_calificacion INT UNSIGNED NOT NULL,
+    nota_anterior DECIMAL(4,2) NOT NULL,
+    nota_nueva DECIMAL(4,2) NOT NULL,
+    fecha_cambio DATETIME NOT NULL,
+    CONSTRAINT fk_historial_calificacion
+        FOREIGN KEY (id_calificacion) REFERENCES calificaciones(id_calificacion)
+);
+
+-- Datos de prueba para las funciones y procedimientos.
+INSERT INTO calificaciones
+    (id_matricula, parcial1, parcial2, parcial_final, trabajo_practico)
+VALUES
+    (1, 4.00, 3.50, 4.20, NULL),
+    (2, 3.00, 4.00, 3.50, 4.50),
+    (3, 2.00, 2.50, 2.80, NULL),
+    (4, 4.50, 4.00, 4.80, 5.00),
+    (5, 3.50, 3.00, 3.20, NULL),
+    (6, 2.50, 3.00, 2.80, NULL);
