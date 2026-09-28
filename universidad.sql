@@ -53,7 +53,6 @@ CREATE TABLE curso_escolar (
 );
 
 CREATE TABLE alumno_se_matricula_asignatura (
-    id_matricula INT UNSIGNED AUTO_INCREMENT UNIQUE,
     id_alumno INT UNSIGNED NOT NULL,
     id_asignatura INT UNSIGNED NOT NULL,
     id_curso_escolar INT UNSIGNED NOT NULL,
@@ -258,6 +257,10 @@ INSERT INTO alumno_se_matricula_asignatura VALUES (19, 7, 5);
 INSERT INTO alumno_se_matricula_asignatura VALUES (19, 8, 5);
 INSERT INTO alumno_se_matricula_asignatura VALUES (19, 9, 5);
 INSERT INTO alumno_se_matricula_asignatura VALUES (19, 10, 5);
+-- Genera un identificador de matrícula después de cargar los datos originales.
+ALTER TABLE alumno_se_matricula_asignatura
+    ADD COLUMN id_matricula INT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE FIRST;
+
 -- ============================================================
 -- FUNCIONES, PROCEDIMIENTOS Y TRIGGERS - EJERCICIO
 -- ============================================================
