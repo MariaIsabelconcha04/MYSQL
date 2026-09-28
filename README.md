@@ -44,3 +44,5 @@ El archivo incluye consultas de prueba al final para comprobar las funciones, pr
 ## Nota
 
 El PDF solicita eventos INSERT/UPDATE para algunos ejercicios de triggers. En MySQL se implementan mediante triggers separados por evento cuando es necesario, manteniendo la funcionalidad solicitada.
+
+> Script revisado para ejecutarse en MySQL Workbench con la estructura `universidad`.
