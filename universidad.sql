@@ -427,8 +427,7 @@ BEGIN
        OR (NEW.trabajo_practico IS NOT NULL AND (NEW.trabajo_practico<0 OR NEW.trabajo_practico>5)) THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='Las notas deben estar entre 0.00 y 5.00.';
     END IF;
-    IF NEW.fecha_registro IS NULL THEN SET NEW.fecha_registro=NOW(); END IF;
-END$$
+END$
 
 CREATE TRIGGER trg_calificaciones_before_update
 BEFORE UPDATE ON calificaciones FOR EACH ROW
@@ -439,7 +438,13 @@ BEGIN
        OR (NEW.trabajo_practico IS NOT NULL AND (NEW.trabajo_practico<0 OR NEW.trabajo_practico>5)) THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='Las notas deben estar entre 0.00 y 5.00.';
     END IF;
-END$$
+END$
+
+CREATE TRIGGER trg_fecha_registro_calificacion
+BEFORE INSERT ON calificaciones FOR EACH ROW
+BEGIN
+    IF NEW.fecha_registro IS NULL THEN SET NEW.fecha_registro=NOW(); END IF;
+END$
 
 CREATE TRIGGER trg_auditoria_calificacion
 AFTER UPDATE ON calificaciones FOR EACH ROW
